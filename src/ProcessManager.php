@@ -142,6 +142,11 @@ class ProcessManager
     /**
      * @var string
      */
+    protected $vendorDirectory = null;
+
+    /**
+     * @var string
+     */
     protected $host = '127.0.0.1';
 
     /**
@@ -441,6 +446,14 @@ class ProcessManager
     public function setStaticDirectory($staticDirectory)
     {
         $this->staticDirectory = $staticDirectory;
+    }
+
+    /**
+     * @param string $vendorDirectory
+     */
+    public function setVendorDirectory($vendorDirectory)
+    {
+        $this->vendorDirectory = $vendorDirectory;
     }
 
     public function setPIDFile($pidfile)
@@ -1180,7 +1193,10 @@ class ProcessManager
 
         $config = var_export($config, true);
 
-        $dir = var_export(__DIR__ . '/..', true);
+        // Allow manually specifying directory to look for autoloader
+        $vendorDir = isset($this->vendorDirectory) ? $this->vendorDirectory : __DIR__ . '/..';
+
+        $dir = var_export($vendorDir, true);
         $script = <<<EOF
 <?php
 
@@ -1188,7 +1204,7 @@ namespace PHPPM;
 
 set_time_limit(0);
 
-require_once file_exists($dir . '/vendor/autoload.php')
+require_once file_exists($dir . '/autoload.php')
     ? $dir . '/vendor/autoload.php'
     : $dir . '/../../autoload.php';
     
