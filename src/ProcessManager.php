@@ -1205,8 +1205,8 @@ namespace PHPPM;
 set_time_limit(0);
 
 require_once file_exists($dir . '/autoload.php')
-    ? $dir . '/vendor/autoload.php'
-    : $dir . '/../../autoload.php';
+    ? $dir . '/autoload.php'
+    : $dir . '/vendor/autoload.php';
     
 if (!pcntl_installed()) {
     error_log(
