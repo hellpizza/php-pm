@@ -97,7 +97,7 @@ trait ConfigTrait
         $config['debug'] = $this->optionOrConfigValue($input, 'debug', $config);
         $config['logging'] = $this->optionOrConfigValue($input, 'logging', $config);
         $config['static-directory'] = $this->optionOrConfigValue($input, 'static-directory', $config);
-        $config['static-directory'] = $this->optionOrConfigValue($input, 'vendor-directory', $config);
+        $config['vendor-directory'] = $this->optionOrConfigValue($input, 'vendor-directory', $config);
         $config['bootstrap'] = $this->optionOrConfigValue($input, 'bootstrap', $config);
         $config['max-requests'] = (int)$this->optionOrConfigValue($input, 'max-requests', $config);
         $config['max-execution-time'] = (int)$this->optionOrConfigValue($input, 'max-execution-time', $config);
