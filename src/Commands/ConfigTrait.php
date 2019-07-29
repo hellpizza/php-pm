@@ -24,7 +24,7 @@ trait ConfigTrait
             ->addOption('debug', null, InputOption::VALUE_REQUIRED, 'Enable/Disable debugging so that your application is more verbose, enables also hot-code reloading. 1|0', 0)
             ->addOption('logging', null, InputOption::VALUE_REQUIRED, 'Enable/Disable http logging to stdout. 1|0', 1)
             ->addOption('static-directory', null, InputOption::VALUE_REQUIRED, 'Static files root directory, if not provided static files will not be served', '')
-            ->addOption('vendor-directory', null, InputOption::VALUE_OPTIONAL, 'Vendor files directory. If not provided will default to __DIR__ above php-pm installation', '')
+            ->addOption('vendor-directory', null, InputOption::VALUE_OPTIONAL, 'Vendor files directory. If not provided will default to the autoloader relative to the php-pm installation', null)
             ->addOption('max-requests', null, InputOption::VALUE_REQUIRED, 'Max requests per worker until it will be restarted', 1000)
             ->addOption('max-execution-time', null, InputOption::VALUE_REQUIRED, 'Maximum amount of time a request is allowed to execute before shutting down', 30)
             ->addOption('memory-limit', null, InputOption::VALUE_REQUIRED, 'Maximum amount of memory a worker is allowed to consume (in MB) before shutting down', -1)
@@ -97,6 +97,7 @@ trait ConfigTrait
         $config['debug'] = $this->optionOrConfigValue($input, 'debug', $config);
         $config['logging'] = $this->optionOrConfigValue($input, 'logging', $config);
         $config['static-directory'] = $this->optionOrConfigValue($input, 'static-directory', $config);
+        $config['static-directory'] = $this->optionOrConfigValue($input, 'vendor-directory', $config);
         $config['bootstrap'] = $this->optionOrConfigValue($input, 'bootstrap', $config);
         $config['max-requests'] = (int)$this->optionOrConfigValue($input, 'max-requests', $config);
         $config['max-execution-time'] = (int)$this->optionOrConfigValue($input, 'max-execution-time', $config);
